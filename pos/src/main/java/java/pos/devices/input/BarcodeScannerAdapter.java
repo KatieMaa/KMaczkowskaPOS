@@ -2,6 +2,10 @@ package java.pos.devices.input;
 
 import java.pos.listeners.BarcodeScanListener;
 
+/**
+ * OK
+ * Wzorzec projektowy dekorator
+ */
 public class BarcodeScannerAdapter implements BarcodeScanner {
 
     private BarcodeScanner barcodeScanner;

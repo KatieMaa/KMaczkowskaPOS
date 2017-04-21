@@ -1,5 +1,8 @@
 package java.pos.model;
 
+/**
+ * OK
+ */
 public class Product {
 
     private String name;
@@ -31,5 +34,4 @@ public class Product {
     public void setBarcode(String barcode) {
         this.barcode = barcode;
     }
-
 }

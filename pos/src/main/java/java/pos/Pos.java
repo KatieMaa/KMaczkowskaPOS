@@ -9,7 +9,20 @@ import java.pos.model.ProductsReceipt;
 import java.pos.utils.MessageUtils;
 import java.util.Optional;
 
-
+/**
+ * NIE OK
+ * Bardzo dziwna nazwa (Pos)
+ *
+ * 1. Bardzo złożone - duża odpowiedzialność
+ * 2. To powinien być serwis (komunikacja z bazą danych, główna logika, obliczenia, ..., "mózg aplikacji")
+ * 3. Pomieszanie front-end(display, drukarka) i back-end(baza danych, DAO)
+ *
+ * To powinny być 2 odrębne elementy:
+ * - listener (?) albo kontroler (front-end)
+ * - serwis (back-end) (PosService i PosServiceImpl)
+ *
+ * Listener powinien być prosty
+ */
 public class Pos implements BarcodeScanListener {
 
     public static final String INVALID_BAR_CODE = "Invalid bar-code";
@@ -28,6 +41,12 @@ public class Pos implements BarcodeScanListener {
         this.printer = printer;
     }
 
+    /**
+     * OK
+     * 1. walidacja - sprawdzanie danych
+     * 2. decyzja co dalej
+     * @param barcode
+     */
     public void onBarcodeScan(String barcode) {
         if (isInvalidCode(barcode)) {
             handleInvalidCode();
@@ -80,6 +99,9 @@ public class Pos implements BarcodeScanListener {
     }
 
     public void handleExitCode() {
+        /**
+         * Java 8 style - iterowanie po elementach listy (lambda)
+         */
         receipt.getAll().stream().forEach(product -> printer.printLine(MessageUtils.getProductMessage(product)));
 
         Double sum = receipt.getSum();
